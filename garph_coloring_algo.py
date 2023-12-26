@@ -16,15 +16,22 @@ def greedy_coloring(graph):
         coloring[node] = next(color for color in itertools.count() if color not in adjacent_colors)
     return coloring
 
-n_nodes = 10
+def generate_random_graph(n_nodes, edge_probability):
+    G = nx.Graph()
+    G.add_nodes_from(range(n_nodes))
 
-G = nx.Graph()
-G.add_nodes_from(range(n_nodes))
+    for i in range(n_nodes):
+        for j in range(i + 1, n_nodes):
+            if random.random() < edge_probability:
+                G.add_edge(i, j)
 
-for i in range(n_nodes):
-    for j in range(i + 1, n_nodes):
-        if random.random() < 0.1:
-            G.add_edge(i, j)
+    return G
+
+# User input
+n_nodes = int(input("Enter the number of nodes: "))
+edge_probability = float(input("Enter the edge probability (between 0 and 1): "))
+
+G = generate_random_graph(n_nodes, edge_probability)
 
 coloring_result = greedy_coloring(G)
 
