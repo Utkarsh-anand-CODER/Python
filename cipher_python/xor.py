@@ -14,5 +14,7 @@ key=b'Utkarsh'
 encrypted=xor_cipher(original_text,key)
 print(encrypted)
 
+
+
 decrypted=xor_cipher(encrypted,key)
 print(decrypted.decode())
